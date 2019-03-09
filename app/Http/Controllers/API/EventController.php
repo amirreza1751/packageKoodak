@@ -56,10 +56,10 @@ class EventController extends Controller
             foreach ($request['charges'] as $item){
                 Event::create($item);
             }
-            return response()->json('Stored.', 200);
+            return response()->json(['status' => 'Stored.'], 200);
         }
 
-        else return response()->json('Bad request', 400);
+        else return response()->json(['status' =>'Bad request'], 400);
 
 
     }

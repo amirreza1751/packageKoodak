@@ -27,6 +27,9 @@ class NotificationController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->validate([
+            'msisdn' => 'required'
+        ]);
         $request = $request->all();
 
         $notification = Notification::create($request);
@@ -44,29 +47,9 @@ class NotificationController extends Controller
                 $user->delete();
             }
         }
-        return response()->json($notification, 200);
+        return response()->json(['status' => 'notification received.'], 200);
 
-        /**
-        if request array changed, we can use this array
-         *
-            $array = [
-            "sid" => $request['sid'],
-            "msisdn" => $request['msisdn'],
-            "trans-id" => $request['trans-id'],
-            "trans-status" => $request['trans-status'],
-            "datetime" => $request['datetime'],
-            "channel" => $request['channel'],
-            "shortcode" => $request['shortcode'],
-            "keyword" => $request['keyword'],
-            "charge-code" => $request['charge-code'],
-            "billed-price-point" => $request['billed-price-point'],
-            "event-type" => $request['event-type'],
-            "validity" => $request['validity'],
-            "next_renewal_date" => $request['next_renewal_date'],
-            "status" => $request['status'],
-            ];
-         *
-         */
+
 
     }
 

@@ -22,9 +22,9 @@ class CreateEventsTable extends Migration
             $table->string('base-price-point');
             $table->string('msisdn');
             $table->string('keyword');
-            $table->string('validity');
+            $table->string('Validity');
             $table->string('next_renewal_date');
-            $table->string('shortcode');
+            $table->string('Shortcode');
             $table->string('billed-price-point');
             $table->string('trans-status');
             $table->string('chargeCode');

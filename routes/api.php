@@ -2,6 +2,7 @@
 
 use App\OtpTransaction;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Webpatser\Uuid\Uuid;
 
@@ -45,8 +46,8 @@ Route::post('/notification', 'API\NotificationController@store');
 
 
 //doc3
-Route::post('/charging_request', 'API\PushRequestController@store');
-Route::post('/charging_confirm', 'API\ChargingConfirmationController@store');
+//Route::post('/charging_request', 'API\PushRequestController@store');
+//Route::post('/charging_confirm', 'API\ChargingConfirmationController@store');
 Route::post('/subscribe_request', 'API\PushRequestController@subscribe_request');
 Route::post('/subscribe_confirm', 'API\ChargingConfirmationController@subscribe_confirm');
 Route::get('/tlist', 'API\ChargingConfirmationController@index');
@@ -64,8 +65,21 @@ Route::get('/uuid',function (){
 
 
 
-Route::middleware('auth:api')->post('/test',function (){
-    return auth('api')->user()->mobile_number;
-    return "Hello World!";
+
+
+Route::get('/test',function (){
+    $client1 =  new Client();
+$r = $client1->request('GET', 'http://uinames.com/api/');
+$r = \GuzzleHttp\json_decode($r->getBody());
+return $r->name;
+});
+
+Route::get('/check',function (){
+    $check_user = auth('api')->user();
+    if (!isset($check_user)){
+        return response()->json(['status'=>'0', 'description'=> 'user is not subscribed.'], 200);
+    }
+    else
+        return response()->json(['status'=>'1', 'description'=> 'user is subscribed.'], 200);
 });
 
