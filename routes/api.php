@@ -58,7 +58,7 @@ Route::middleware('auth:api')->post('/test', function (){
     return response()->json($user->mobile_number, 200);
 });
 
-Route::get('/uuid',function (){
+Route::get('/uuid2',function (){
     return Uuid::generate()->string;
 });
 
@@ -82,4 +82,3 @@ Route::get('/check',function (){
     else
         return response()->json(['status'=>'1', 'description'=> 'user is subscribed.'], 200);
 });
-
