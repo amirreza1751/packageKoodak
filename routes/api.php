@@ -58,7 +58,7 @@ Route::middleware('auth:api')->post('/test', function (){
     return response()->json($user->mobile_number, 200);
 });
 
-Route::get('/uuid2',function (){
+Route::get('/uuid',function (){
     return Uuid::generate()->string;
 });
 

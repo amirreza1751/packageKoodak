@@ -84,23 +84,21 @@ class PushRequestController extends Controller
 
         $request = $request->all();
         $array = [
-            "servicekey" => 'e5f2ba4fad93434b80aac53be1eaf321',
-            "msisdn" => $request['msisdn'],
-            "serviceName" => 'CESFCOACHLAND',
-            "referenceCode" => Uuid::generate()->string, // unique mal mast
-//            "referenceCode" => 'test',
-            "shortCode" => '984068210',
-//            "contentId" => Uuid::generate()->string, // unique mal mast
-            "contentId" => uniqid(), // unique mal mast
-            "code" => 'ESFSUBCESFCOACHLAN',  // nt charge code
-            "amount" => '500',
-            "description" => 'tst message from IMI'
+            "username" => 'Mana',
+            "password" => 'ZFP7*z5e',
+            "shortcode" => '983073102',
+            "servicekey" => '574e439b0775413c9523fc68a7e26b00',
+            "chargecode" => 'MOBSUBCMOBPACKAGEK',
+            "number" => $request['msisdn'],
+            "amount" => '0',
+            "requestId" => uniqid(),
         ];
 
 
         $client1 =  new Client();
-        $r = $client1->request('POST', 'https://31.47.36.141:10443/otp/request', ['auth'=>['coachland456', '9a51a663fa7c'], 'form_params' => $array, 'verify'=> false]);
+        $r = $client1->request('POST', 'http://10.0.113.102:8080/server.php', ['form_params' => $array, 'verify'=> false]);
 
+        return $r->getBody()->getContents();
 
         /** log */
         Log::create([
